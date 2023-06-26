@@ -1,6 +1,7 @@
 import { getAnimeById, options } from '../../utils/fetcher'
 import Tag from '../../components/Tag'
 import Link from 'next/link'
+import HeadTag from '@/components/Head'
 
 
 
@@ -9,6 +10,7 @@ export default function Page({ anime }) {
   return( 
     <>
 
+      <HeadTag title={`${anime.title}`} />
       {/* <ul> */}
       {/*   <li>{anime.title}</li> */}
       {/*   <li>{anime.episodes}</li> */}
