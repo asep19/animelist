@@ -2,9 +2,11 @@ export const baseUrl = 'https://anime-db.p.rapidapi.com'
 export const defaultList = `${baseUrl}/anime?page=1&size=20&genres=Supernatural&sortBy=ranking&sortOrder=asc`
 export const getAnimeById = `${baseUrl}/anime/by-id`
 
+
 export const endpoints = {
   byId: `${baseUrl}/anime/by-id`,
   genres: `${baseUrl}/anime?page=1&size=20&genres`,
+  searchAnime: `${baseUrl}/anime?page=1&size=20`
 }
 
 

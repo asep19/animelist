@@ -1,19 +1,48 @@
 import AnimeCard from "@/components/AnimeCard";
-// import { animes } from "../data/animeData";
-import { baseUrl, options } from "../utils/fetcher"
+import { baseUrl, options, endpoints } from "../utils/fetcher"
 import HeadTag from "@/components/Head";
+import { useState, useEffect } from 'react'
+
+// import GenreList from "@/components/GenreList";
+
 
 export default function Home({result}) {
-  // console.log(result.data[0].title)
+  const [searchTerm, setSearchTerm] = useState("")
+  const [animeData, setAnimeData] = useState([]);
+  
+  const searchAnime = async (title) => {
+    const responses = await fetch(`${endpoints.searchAnime}&search=${title}&sortBy=ranking&sortOrder=asc`, options)
+    const animes = await responses.json()
+    setAnimeData(animes.data)
+  }
+
+  useEffect(() => {
+    setAnimeData(result.data)
+  }, [])
   return (
     <>
       <HeadTag title="Top Anime"/>
+
+      <header className="bg-gray-50">
+        <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 lg:px-8">
+          <input
+            className="h-10 w-full rounded-full border-none bg-white pe-10 ps-4 text-sm shadow-sm sm:w-56"
+            id="search"
+            type="search"
+            placeholder="Search website..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+          <button onClick={() => searchAnime(searchTerm)} className="btn btn-sm btn-secondary">Search</button>
+        </div>
+      </header>
+
       <div className="p-4">
         <h2 className="text-3xl text-blue-400 text-underline">Top Anime</h2>
         {"jumlah anime:" + result.meta.totalData} 
         <div className="flex flex-wrap items-start">
           {
-            result.data.map((anime) => (
+            animeData.map((anime) => (
               <AnimeCard 
                 key={anime._id}
                 title={anime.title}

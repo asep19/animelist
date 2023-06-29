@@ -7,4 +7,6 @@ const genres = {
   supernatural: "Supernatural"
 }
 
+export const genress = ["Action", "Award Winning", "Drama", "Comedy", "Supernatural"]
+
 export default genres
