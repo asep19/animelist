@@ -1,28 +1,30 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
-function AnimeCard({ title, imgUrl, rating, type, url }) {
-  // console.log(url)
+function AnimeCard({ title, imgUrl, genres, url }) {
   return( 
     <Link href={url}>
-      <div className="w-[180px] max-h-[300px] inline-block cursor-pointer  border-black p-2">
-        <div className=" overflow-hidden relative">
-          <img className="object-cover" src={imgUrl} alt={title} /> 
-          <span className="absolute bottom-0 right-0 bg-blue-500/80 text-white text-sm px-3 py-0.5">
-            {type}
-          </span>
-        </div>
-        <div className="pt-2">
-          <h2 className="text-sm">{ title }</h2>
-          {/* <div className="flex items-center"> */}
-          {/*   <div className="flex items-center">  */}
-          {/*     <img className="w-4 h-4" src="/star.svg" alt="" /> */}
-          {/*     <img className="w-4 h-4" src="/star.svg" alt="" /> */}
-          {/*     <img className="w-4 h-4" src="/star.svg" alt="" /> */}
-          {/*     <img className="w-4 h-4" src="/star.svg" alt="" /> */}
-          {/*     <img className="w-4 h-4" src="/star.svg" alt="" /> */}
-          {/*   </div> */}
-          {/*   <span className="ml-2 text-sm text-gray-400">{rating}</span> */}
-          {/* </div> */}
+      <div 
+        className="w-[192px] h-[273px] m-2 relative rounded-xl cursor-pointer overflow-hidden"
+      >
+        <figure>
+          <Image 
+            src={imgUrl}
+            loader={() => imgUrl}
+            width={192}
+            height={273}
+            alt={title}
+            className="rounded-xl object-cover"
+          />
+          {/* <img className="rounded-xl" src={imgUrl} /> */}
+        </figure>
+        <div className="absolute top-0 h-full w-full bg-gradient-to-t from-black/50 rounded-xl">      
+          <div className="absolute bottom-0 w-full text-white p-3 ">
+            <p className="font-semibold truncate">{title}</p>
+            <p className="text-sm text-white/80">
+              <span>{genres.length < 2 ? genres[0] : `${genres[0]}, ${genres[1]}`}</span>
+            </p>
+          </div>
         </div>
       </div>
     </Link>

@@ -47,8 +47,7 @@ export default function Home({result}) {
                 key={anime._id}
                 title={anime.title}
                 imgUrl={anime.image}
-                rating={anime.ranking}
-                type={anime.type}
+                genres={anime.genres}
                 url={`anime/${anime._id}`}
               />
             ))
