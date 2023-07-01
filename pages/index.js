@@ -1,5 +1,6 @@
 import AnimeCard from "@/components/AnimeCard";
-import { baseUrl, options, endpoints } from "../utils/fetcher"
+// import { baseUrl, options, endpoints } from "../utils/fetcher"
+import { baseUrl, fetchApi } from "../utils/fetchApi";
 import HeadTag from "@/components/Head";
 import { useState, useEffect } from 'react'
 
@@ -39,16 +40,17 @@ export default function Home({result}) {
 
       <div className="p-4">
         <h2 className="text-3xl text-blue-400 text-underline">Top Anime</h2>
-        {"jumlah anime:" + result.meta.totalData} 
+        {/* {"jumlah anime:" + result.meta.totalData}  */}
         <div className="flex flex-wrap items-start">
           {
             animeData.map((anime) => (
               <AnimeCard 
-                key={anime._id}
+                key={anime.mal_id}
                 title={anime.title}
-                imgUrl={anime.image}
-                genres={anime.genres}
-                url={`anime/${anime._id}`}
+                imgUrl={anime.images.webp.image_url}
+                genres={anime.genres[0].name}
+                year={anime.year}
+                url={`anime/${anime.mal_id}`}
               />
             ))
           }
@@ -60,8 +62,9 @@ export default function Home({result}) {
 
 
 export async function getServerSideProps() {
-	const response = await fetch(`${baseUrl}/anime?page=1&size=20`, options);
-	const result = await response.json();
+	// const response = await fetch(`${baseUrl}/anime?page=1&size=20`, options);
+	// const result = await response.json();
+  const result = await fetchApi(`${baseUrl}/top/anime`)
 
   return {
     props: {result}

@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 
-function AnimeCard({ title, imgUrl, genres, url }) {
+function AnimeCard({ title, imgUrl, genres, url, year }) {
   return( 
     <Link href={url}>
       <div 
@@ -22,7 +22,8 @@ function AnimeCard({ title, imgUrl, genres, url }) {
           <div className="absolute bottom-0 w-full text-white p-3 ">
             <p className="font-semibold truncate">{title}</p>
             <p className="text-sm text-white/80">
-              <span>{genres.length < 2 ? genres[0] : `${genres[0]}, ${genres[1]}`}</span>
+              {/* <span>{genres.length < 2 ? genres[0] : `${genres[0]}, ${genres[1]}`}</span> */}
+              {`${year !== null ? year+', ' : ''} ${genres}`}
             </p>
           </div>
         </div>

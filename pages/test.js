@@ -1,6 +1,8 @@
 import TestCard from '@/components/TestCard'
+import { baseUrl, fetchApi } from '@/utils/fetchApi'
 
-export default function Test() {
+export default function Test({ data }) {
+  console.log(data)
   return(
     <>
       <head>
@@ -13,4 +15,11 @@ export default function Test() {
       </main>
     </>
   )
+}
+
+export async function getServerSideProps() {
+  const data = await fetchApi(`${baseUrl}/top/anime`)
+  return {
+    props: {data}
+  }
 }
