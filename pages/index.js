@@ -60,7 +60,7 @@ export default function Home({result}) {
 
 
 export async function getServerSideProps() {
-	const response = await fetch(`${baseUrl}/anime?page=1&size=10`, options);
+	const response = await fetch(`${baseUrl}/anime?page=1&size=20`, options);
 	const result = await response.json();
 
   return {
