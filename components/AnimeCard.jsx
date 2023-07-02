@@ -18,7 +18,7 @@ function AnimeCard({ title, imgUrl, genres, url, year }) {
           />
           {/* <img className="rounded-xl" src={imgUrl} /> */}
         </figure>
-        <div className="absolute top-0 h-full w-full bg-gradient-to-t from-black/50 rounded-xl">      
+        <div className="absolute top-0 h-full w-full bg-gradient-to-t from-black/50 rounded-xl transition-colors duration-100 ease-linear hover:bg-black/50 ">      
           <div className="absolute bottom-0 w-full text-white p-3 ">
             <p className="font-semibold truncate">{title}</p>
             <p className="text-sm text-white/80">
