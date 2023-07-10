@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: 'class',
   content: [
     "./app/**/*.{js,ts,jsx,tsx}",
     "./pages/**/*.{js,ts,jsx,tsx}",
@@ -9,7 +10,7 @@ module.exports = {
     extend: {},
   },
   daisyui: {
-    themes: false
+    themes: ['dark', 'light', 'dracula']
   },
   plugins: [
     require('@tailwindcss/forms'),
