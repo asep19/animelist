@@ -1,8 +1,8 @@
 import AnimeCard from "@/components/AnimeCard";
 // import { baseUrl, options, endpoints } from "../utils/fetcher"
-import { baseUrl, fetchApi } from "../utils/fetchApi";
+import { BASE_URL, fetchApi } from "../utils/fetchApi";
 import HeadTag from "@/components/Head";
-import { useState, useEffect } from 'react'
+// import { useState, useEffect } from 'react'
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import { FeaturedCollections } from "@/components/collections/FeaturedCollections";
@@ -10,9 +10,12 @@ import { FeaturedCollections } from "@/components/collections/FeaturedCollection
 // import GenreList from "@/components/GenreList";
 
 
+
 export default function Home({result}) {
+// export default function Home() {
   // const [searchTerm, setSearchTerm] = useState("")
-  const [animeData, setAnimeData] = useState([]);
+  // const animeData = result.data;
+  // const [animeData, setAnimeData] = useState([]);
   
   // const searchAnime = async (title) => {
   //   const responses = await fetch(`${endpoints.searchAnime}&search=${title}&sortBy=ranking&sortOrder=asc`, options)
@@ -20,9 +23,10 @@ export default function Home({result}) {
   //   setAnimeData(animes.data)
   // }
 
-  useEffect(() => {
-    setAnimeData(result.data)
-  }, [])
+  console.log(result)
+  // useEffect(() => {
+  //   setAnimeData(result.data)
+  // }, [])
   return (
     <>
       <HeadTag title="Top Anime"/>
@@ -58,18 +62,18 @@ export default function Home({result}) {
           <h2 className="text-xl font-semibold ml-2 mb-2 text-white text-underline">Special For You</h2>
           {/* {"jumlah anime:" + result.meta.totalData}  */}
           <div className="flex flex-wrap items-start">
-            {
-              animeData.map((anime) => (
-                <AnimeCard 
-                  key={anime.mal_id}
-                  title={anime.title}
-                  imgUrl={anime.images.webp.image_url}
-                  genres={anime.genres[0].name}
-                  year={anime.year}
-                  url={`anime/${anime.mal_id}`}
-                />
-              ))
-            }
+            {/* { */}
+            {/*   animeData.map((anime) => ( */}
+            {/*     <AnimeCard  */}
+            {/*       key={anime.mal_id} */}
+            {/*       title={anime.title} */}
+            {/*       imgUrl={anime.images.webp.image_url} */}
+            {/*       genres={anime.genres[0].name} */}
+            {/*       year={anime.year} */}
+            {/*       url={`anime/${anime.mal_id}`} */}
+            {/*     /> */}
+            {/*   )) */}
+            {/* } */}
           </div>
         </div>
         <FeaturedCollections />
@@ -80,9 +84,12 @@ export default function Home({result}) {
 
 
 export async function getServerSideProps() {
-	// const response = await fetch(`${baseUrl}/anime?page=1&size=20`, options);
+	// const response = await fetch(`${BASE_URL}/top/anime?limit=6`);
 	// const result = await response.json();
-  const result = await fetchApi(`${baseUrl}/top/anime?limit=6`)
+  const result = await fetchApi(`${BASE_URL}/top/anime?limit=8`)
+  // const result = await fetchApi(`https://dummyjson.com/products/1`)
+	// const response = await fetch("https://dummyjson.com/products/1");
+	// const result = await response.json();
 
   return {
     props: {result}

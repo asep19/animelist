@@ -1,4 +1,4 @@
-import axios from "axios";
+// import axios from "axios";
 
 // export const baseUrl = "https://myanimelist.p.rapidapi.com";
 
@@ -12,10 +12,14 @@ import axios from "axios";
 //   return data;
 // };
 
-export const baseUrl = "https://api.jikan.moe/v4"
+export const BASE_URL = "https://api.jikan.moe/v4"
 export const fetchApi = async (url) => {
-  const { data } = await axios.get(url)
-  return data;
-
+  const data = await fetch(url)
+  return data.json()
 }
+// export const fetchApi = async (url) => {
+//   const { data } = await axios.get(url)
+//   return data;
+//
+// }
 
