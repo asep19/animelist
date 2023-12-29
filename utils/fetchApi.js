@@ -17,6 +17,7 @@ export const fetchApi = async (url) => {
   const data = await fetch(url)
   return data.json()
 }
+
 // export const fetchApi = async (url) => {
 //   const { data } = await axios.get(url)
 //   return data;

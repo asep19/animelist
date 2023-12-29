@@ -1,5 +1,4 @@
 import AnimeCard from "@/components/AnimeCard";
-// import { baseUrl, options, endpoints } from "../utils/fetcher"
 import { BASE_URL, fetchApi } from "../utils/fetchApi";
 import HeadTag from "@/components/Head";
 // import { useState, useEffect } from 'react'
@@ -14,7 +13,7 @@ import { FeaturedCollections } from "@/components/collections/FeaturedCollection
 export default function Home({result}) {
 // export default function Home() {
   // const [searchTerm, setSearchTerm] = useState("")
-  // const animeData = result.data;
+  const animeData = result.data;
   // const [animeData, setAnimeData] = useState([]);
   
   // const searchAnime = async (title) => {
@@ -38,7 +37,7 @@ export default function Home({result}) {
             <p className="text-lg">
               Ever since the death of his father, the burden of supporting the family has fallen upon Tanjirou Kamado's shoulders.
             </p>
-            <a href="/" className="btn btn-primary mt-3">Learn More</a>
+            <a href="/" className="btn btn-primary mt-3 capitalize">Learn More</a>
           </div>
         </div>
       </Hero>
@@ -62,18 +61,18 @@ export default function Home({result}) {
           <h2 className="text-xl font-semibold ml-2 mb-2 text-white text-underline">Special For You</h2>
           {/* {"jumlah anime:" + result.meta.totalData}  */}
           <div className="flex flex-wrap items-start">
-            {/* { */}
-            {/*   animeData.map((anime) => ( */}
-            {/*     <AnimeCard  */}
-            {/*       key={anime.mal_id} */}
-            {/*       title={anime.title} */}
-            {/*       imgUrl={anime.images.webp.image_url} */}
-            {/*       genres={anime.genres[0].name} */}
-            {/*       year={anime.year} */}
-            {/*       url={`anime/${anime.mal_id}`} */}
-            {/*     /> */}
-            {/*   )) */}
-            {/* } */}
+            {
+              animeData.map((anime) => (
+                <AnimeCard 
+                  key={anime.mal_id}
+                  title={anime.title}
+                  imgUrl={anime.images.webp.image_url}
+                  genres={anime.genres[0].name}
+                  year={anime.year}
+                  url={`anime/${anime.mal_id}`}
+                />
+              ))
+            }
           </div>
         </div>
         <FeaturedCollections />
