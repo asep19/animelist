@@ -1,26 +1,10 @@
-// import axios from "axios";
-
-// export const baseUrl = "https://myanimelist.p.rapidapi.com";
-
-// export const fetchApi = async (url) => {
-//   const { data } = await axios.get(url, {
-//     headers: {
-//       "X-RapidApi-Key": "d7575619acmsh72fcd43ed40a67ep16108ajsnaf113432e015",
-//       "X-RapidApi-Host": "myanimelist.p.rapidapi.com",
-//     },
-//   });
-//   return data;
-// };
-
 export const BASE_URL = "https://api.jikan.moe/v4"
-export const fetchApi = async (url) => {
-  const data = await fetch(url)
-  return data.json()
+
+export async function fetchAPI(url, opt= { cache: 'force-cache' }) {
+  const res = await fetch(`${BASE_URL}${url}`, opt)
+  if(!res.ok) {
+    throw new Error('Failed to fetch data.')
+  }
+  
+  return res.json()
 }
-
-// export const fetchApi = async (url) => {
-//   const { data } = await axios.get(url)
-//   return data;
-//
-// }
-
