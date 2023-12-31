@@ -1,14 +1,14 @@
-import { fetchAPI } from "@/utils/fetchApi"
 import AnimeCard from "@/components/anime-card"
+import { fetchAPI } from "@/utils/fetchApi"
 
 export default async function Page({ params }) {
-  const response = await fetchAPI(`/anime?genres=${params.id}&limit=20&order_by=score&sort=desc`)
+  const [season, year] = params.season.split('-')
+  const response = await fetchAPI(`/seasons/${year}/${season}`)
   const animes = response.data
   return (
       <div className="flex flex-wrap items-start">
-
       {animes.map((anime) => (
-        <AnimeCard {...anime}/>
+        <AnimeCard {...anime} />
       ))}
     </div>
   )
