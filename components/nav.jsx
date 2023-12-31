@@ -9,6 +9,7 @@ import {
   navigationMenuTriggerStyle
 } from '@/components/ui/navigation-menu'
 import Link from 'next/link'
+import { ModeToggle } from './toggle-theme'
 
 const Nav = () => {
   return (
@@ -27,6 +28,9 @@ const Nav = () => {
               Genres
             </NavigationMenuLink>
           </Link>
+        </NavigationMenuItem>
+        <NavigationMenuItem>
+          <ModeToggle />
         </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>
