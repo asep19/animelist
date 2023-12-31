@@ -12,10 +12,10 @@ export default async function Page({ params }) {
         <h1 className="text-2xl font-semibold">{anime.title}</h1>
         <p>{anime.title_japanese}</p>
         <p className="space-x-2 mb-4">
-          {anime.genres.map(({ name }) => (
+          {anime.genres.map(({ mal_id, name }) => (
             <Link 
               key={name}
-              href={`genres/${name}`}
+              href={`genres/${mal_id}`}
               className={badgeVariants({ variant: 'secondary' })}
             >
               {name}
