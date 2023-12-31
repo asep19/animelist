@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { fetchAPI } from "@/utils/fetchApi";
 import { badgeVariants } from "@/components/ui/badge"
+import Img from "@/components/image";
 
 export default async function Page({ params }) {
   const response = await fetchAPI(`/anime/${params.animeId}`)
@@ -9,6 +10,13 @@ export default async function Page({ params }) {
   return (
     <section>
       <div className="container mx-auto">
+          <Img 
+            src={anime.images.webp.image_url}
+            width={225}
+            height={315}
+            alt={anime.title}
+            className="rounded-md object-cover"
+          />
         <h1 className="text-2xl font-semibold">{anime.title}</h1>
         <p>{anime.title_japanese}</p>
         <p className="space-x-2 mb-4">
