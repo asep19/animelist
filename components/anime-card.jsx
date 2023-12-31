@@ -1,7 +1,7 @@
 "use client";
 
 import Link from 'next/link';
-import Image from 'next/image';
+import Img from './image';
 
 function AnimeCard({mal_id, title, images, genres, year}) {
   return( 
@@ -10,9 +10,8 @@ function AnimeCard({mal_id, title, images, genres, year}) {
         className="w-[192px] h-[273px] m-2 relative rounded-xl cursor-pointer overflow-hidden"
       >
         <figure>
-          <Image 
+          <Img 
             src={images.webp.image_url}
-            loader={() => images.webp.image_url}
             width={192}
             height={273}
             alt={title}
