@@ -2,7 +2,8 @@ import Link from 'next/link';
 import Img from './image';
 
 function VoiceActorCard({ voice_actors }) {
-  const {person: { name, images }, language} = voice_actors[0]
+  const japaneseVoiceActor = voice_actors.filter((va) => va.language == "Japanese")
+  const {person: { name, images }, language} = japaneseVoiceActor[0]
   return( 
     <Link href={`/`}>
       <div 
