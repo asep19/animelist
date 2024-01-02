@@ -8,7 +8,33 @@ export default async function VoiceActorPage({ params: {id} }) {
   const getVoices = await fetchAPI(`/people/${id}/voices`)
 
   const person = getPerson.data
-  const personVoices = getVoices.data
+  const unfilterData = getVoices.data
+
+  function filteredCharacter(data) {
+    const newObj = {}
+
+    data.forEach(obj => {
+      const id = obj.character.mal_id
+      const animeTitle = obj.anime.title
+      if(newObj[id]) {
+        newObj[id].anime.push(animeTitle)
+      } else {
+        newObj[id] = {
+          id: id,
+          name: obj.character.name,
+          images: obj.character.images.jpg.image_url,
+          role: obj.role,
+          anime: [animeTitle]
+        }
+      }
+    })
+
+    return Object.values(newObj)
+  }
+
+  const personVoices = filteredCharacter(unfilterData)
+  
+  
   return (
     <section>
       <div className="container mx-auto">
@@ -26,25 +52,27 @@ export default async function VoiceActorPage({ params: {id} }) {
           </div>
         </div>
         <ul className="flex flex-wrap">
-          {personVoices.map(({role, anime, character}) => (
-            <li className="w-[360px] flex bg-secondary">
+          {personVoices.map(({id, name, images, role, anime }) => (
+            <li key={id} className="w-[360px] flex bg-secondary">
               <Img
-                src={character.images.jpg.image_url}
+                src={images}
                 width={84}
                 height={124}
-                alt={person.name}
+                alt={name}
                 className="shrink-0 object-cover rounded-tl-md rounded-bl-md"
               />
               <div className="w-full px-2 py-1 flex flex-col justify-between rounded-tr-md rounded-br-md">
                 <div className="">
-                  <p className="text-lg">{formatName(character.name)}</p>
+                  <p className="text-lg">{formatName(name)}</p>
                   <p className="text-xs text-foreground/80">{role}</p>
                 </div>
                 <div>
                   <span className="text-xs text-foreground/50 block">From anime:</span>
-                  <Link href={`/${anime.mal_id}`} className="text-sm text-primary/80">
-                    {anime.title}
-                  </Link>
+                  {anime.map(item => (
+                    <Link href={`/${anime.mal_id}`} className="text-sm text-primary/80">
+                      {item}
+                    </Link>
+                  ))}
                 </div>
               </div>
             </li>
