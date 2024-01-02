@@ -3,9 +3,9 @@ import Img from './image';
 
 function VoiceActorCard({ voice_actors }) {
   const japaneseVoiceActor = voice_actors.filter((va) => va.language == "Japanese")
-  const {person: { name, images }, language} = japaneseVoiceActor[0]
+  const {person: { mal_id, name, images }, language} = japaneseVoiceActor[0]
   return( 
-    <Link href={`/`}>
+    <Link href={`/voice-actors/${mal_id}`}>
       <div 
         className="w-[152px] h-[200px] m-2 relative rounded-xl cursor-pointer overflow-hidden"
       >
