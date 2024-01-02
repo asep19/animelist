@@ -4,7 +4,6 @@ import { badgeVariants } from "@/components/ui/badge"
 import Img from "@/components/image";
 import CharacterCard from "@/components/character-card";
 import VoiceActorCard from "@/components/voice-actor-card";
-import YoutubeEmbed from "@/components/youtube-embed";
 
 export default async function Page({ params }) {
   const response = await fetchAPI(`/anime/${params.animeId}`)
@@ -52,8 +51,8 @@ export default async function Page({ params }) {
             </li>
             <li>
               <span className="mr-2">Season:</span>
-              <Link href={`seasons/${anime.season}-${anime.year}`}>
-                <span className="capitalize">{`${anime.season} ${anime.year}`}</span>
+              <Link href={`seasons/${anime.season}-${anime.year}`} className="capitalize">
+               {`${anime.season} ${anime.year}`}
               </Link>
             </li>
             <li>
@@ -70,16 +69,16 @@ export default async function Page({ params }) {
             </li>
           </ol>
         </div>
-        <YoutubeEmbed src={anime.trailer.embed_url} />
         <div className="mt-6">
           <h2 className="text-xl font-semibold">Characters & Voice Actors</h2>
           <ul className="grid grid-cols-3 gap-4">
             {characters.map((props) => (
-              <li key={props.character.mal_id}>
-                <div className="max-w-max flex space-x-2 p-2 border rounded-md">
-                  <CharacterCard {...props}/>
-                  <VoiceActorCard {...props} />
-                </div>
+              <li 
+                key={props.character.mal_id}
+                className="max-w-max flex space-x-2 p-2 border rounded-md"
+              >
+                <CharacterCard {...props}/>
+                <VoiceActorCard {...props} />
               </li>
             ))}
           </ul>
