@@ -1,4 +1,5 @@
 import Img from "@/components/image"
+import formatName from "@/lib/format-name"
 import { fetchAPI } from "@/utils/fetchApi"
 import Link from "next/link"
 
@@ -36,7 +37,7 @@ export default async function VoiceActorPage({ params: {id} }) {
               />
               <div className="w-full px-2 py-1 flex flex-col justify-between rounded-tr-md rounded-br-md">
                 <div className="">
-                  <p className="text-lg">{character.name.split(',').reverse().join(' ').trim()}</p>
+                  <p className="text-lg">{formatName(character.name)}</p>
                   <p className="text-xs text-foreground/80">{role}</p>
                 </div>
                 <div>
