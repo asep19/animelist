@@ -3,7 +3,8 @@ import Link from "next/link"
 
 export default async function Genres() {
   const response = await fetchAPI('/genres/anime')
-  const genres = response.data
+  const genres = response.data.sort((a, b) => a.name.localeCompare(b.name))
+  console.log(genres)
   
   return (
     <ul className="w-[640px] p-4 text-sm columns-4">
