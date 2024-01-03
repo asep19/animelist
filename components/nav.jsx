@@ -11,7 +11,7 @@ import {
 import Link from 'next/link'
 import { ModeToggle } from './toggle-theme'
 
-const Nav = () => {
+export default function Nav ({genre}) {
   return (
     <NavigationMenu>
       <NavigationMenuList>
@@ -22,12 +22,11 @@ const Nav = () => {
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem>
-        <NavigationMenuItem>
-          <Link href="/genres">
-            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              Genres
-            </NavigationMenuLink>
-          </Link>
+        <NavigationMenuItem className="ml-6">
+          <NavigationMenuTrigger>Genres</NavigationMenuTrigger>
+          <NavigationMenuContent >
+            {genre}
+          </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem>
           <ModeToggle />
@@ -37,4 +36,3 @@ const Nav = () => {
   )
 }
 
-export default Nav

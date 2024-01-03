@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import { metadata as mdata } from "@/data/metadata"
 import Nav from '@/components/nav'
 import { ThemeProvider } from '@/components/theme-provider'
+import Genres from '@/components/genres'
 
 
 const inter = Inter({subsets: ['latin']})
@@ -19,7 +20,7 @@ export default function RootLayout({ children }) {
           enableSystem
           disableTransitionOnChange
         >
-          <Nav />
+          <Nav genre={<Genres />} />
           { children }
         </ThemeProvider>
       </body>
