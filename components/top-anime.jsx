@@ -5,7 +5,6 @@ export default async function TopAnime() {
   const response = await fetchAPI('/top/anime?filter=favorite&limit=10&sfw=true')
   const animes = response.data
 
-  console.log(response)
   return (
     <div>
       <h1 className="text-2xl font-semibold">Top Anime</h1>
