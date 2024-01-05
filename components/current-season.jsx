@@ -13,7 +13,7 @@ const CurrentSeasons = async () => {
       <h1 className="text-2xl font-semibold">Current Season</h1>
       <div className="flex flex-wrap items-start">
         {filteredData.map((animeData) => (
-          <AnimeCard {...animeData}/>
+          <AnimeCard key={animeData.mal_id} {...animeData}/>
         ))}
       </div>
     </section>

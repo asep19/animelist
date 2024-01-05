@@ -10,7 +10,7 @@ export default async function TopAnime() {
       <h1 className="text-2xl font-semibold">Top Anime</h1>
       <div className="flex flex-wrap items-start mt-4">
         {animes.map((topAnime) => (
-          <AnimeCard {...topAnime}/>
+          <AnimeCard key={topAnime.mal_id} {...topAnime}/>
         ))}
       </div>
     </div>

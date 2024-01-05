@@ -8,7 +8,7 @@ export default async function Page({ params }) {
   return (
       <div className="flex flex-wrap items-start">
       {animes.map((anime) => (
-        <AnimeCard {...anime} />
+        <AnimeCard key={anime.mal_id} {...anime} />
       ))}
     </div>
   )

@@ -15,7 +15,7 @@ export default async function Page({ params, searchParams }) {
       <div className="flex flex-wrap items-start">
 
       {animes.map((anime) => (
-        <AnimeCard {...anime}/>
+        <AnimeCard key={anime.mal_id} {...anime}/>
       ))}
       <Pagination>
         <PaginationContent>
