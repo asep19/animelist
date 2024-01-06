@@ -59,3 +59,30 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Scrollbar Style*/
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* track */
+::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+
+/* handle */
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-500;
+  border-radius: 100px;
+}
+
+/* handle on background */
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-700;
+}
+
+/* Gutter */
+.scrollbar-gutter {
+  scrollbar-gutter: stable;
+}

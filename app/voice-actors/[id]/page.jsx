@@ -1,6 +1,9 @@
 import Img from "@/components/image"
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
 import formatName from "@/lib/format-name"
+import { cn } from "@/lib/utils"
 import { fetchAPI } from "@/utils/fetchApi"
+import { OpenInNewWindowIcon } from "@radix-ui/react-icons"
 import Link from "next/link"
 
 export default async function VoiceActorPage({ params: {id} }) {
@@ -16,15 +19,16 @@ export default async function VoiceActorPage({ params: {id} }) {
     data.forEach(obj => {
       const id = obj.character.mal_id
       const animeTitle = obj.anime.title
+      const animeId =  obj.anime.mal_id
       if(newObj[id]) {
-        newObj[id].anime.push(animeTitle)
+        newObj[id].anime.push([animeId, animeTitle])
       } else {
         newObj[id] = {
           id: id,
           name: obj.character.name,
           images: obj.character.images.jpg.image_url,
           role: obj.role,
-          anime: [animeTitle]
+          anime: [[animeId, animeTitle]]
         }
       }
     })
@@ -33,47 +37,73 @@ export default async function VoiceActorPage({ params: {id} }) {
   }
 
   const personVoices = filteredCharacter(unfilterData)
+  const formatDate = date => new Date(date).toDateString()
+  
   
   
   return (
     <section>
-      <div className="container mx-auto">
-        <div className="flex space-x-4">
-          <Img
-            src={person.images.jpg.image_url}
-            width={180}
-            height={260}
-            alt={person.name}
-            className="rounded-md object-cover"
-          />
-          <div>
-            <h1 className="text-2xl">{person.name}</h1>
+      <div className="container mx-auto py-8">
+        <div className="flex items-center space-x-6">
+          <div className={cn(
+            "shrink-0 shadow-lg",
+            "border-[10px] border-b-[24px] border-white -rotate-6",
+          )}> 
+            <div className={cn(
+            "relative w-[230px] aspect-[4/3] bg-white",
+            )}>
+              
+              <Img
+                src={person.images.jpg.image_url}
+                fill={true}
+                alt={person.name}
+                className="object-cover object-center"
+              />
+            </div>
+          </div>
+          <div className="-mt-6">
+            <h1 className="text-2xl font-semibold">{person.name}</h1>
             <p>{`${person.family_name} ${person.given_name}`}</p>
+            <p className="mt-2">
+              <span className="text-foreground/80 mr-2">Birthday:</span> 
+              {formatDate(person.birthday)}
+            </p>
+            <p>
+              <span className="text-foreground/80 mr-2">Website:</span>
+              {person.website_url ? (
+                <a href={person.website_url} target="_blank" className="hover:text-primary underline">
+                  {person.website_url}
+                  <OpenInNewWindowIcon className="inline-block ml-1 mb-2" />
+                </a>
+              ): '-'}
+            </p>
           </div>
         </div>
-        <ul className="flex flex-wrap">
+        <ul className="grid grid-cols-3 row-start-auto gap-5 mt-12">
           {personVoices.map(({id, name, images, role, anime }) => (
-            <li key={id} className="w-[360px] flex bg-secondary">
-              <Img
-                src={images}
-                width={84}
-                height={124}
-                alt={name}
-                className="shrink-0 object-cover rounded-tl-md rounded-bl-md"
-              />
-              <div className="w-full px-2 py-1 flex flex-col justify-between rounded-tr-md rounded-br-md">
-                <div className="">
-                  <p className="text-lg">{formatName(name)}</p>
-                  <p className="text-xs text-foreground/80">{role}</p>
-                </div>
+            <li key={id} className="flex h-[142px] overflow-hidden hover:overflow-auto scrollbar-gutter p-2 rounded-lg ">
+              <div className="grow-0 relative w-[84px] aspect-[2/3] border-[3px] border-border">
+                <Img
+                  src={images}
+                  alt={name}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <div className="ml-2 ">
                 <div>
-                  <span className="text-xs text-foreground/50 block">From anime:</span>
-                  {anime.map(item => (
-                    <Link href={`/${anime.mal_id}`} className="text-sm text-primary/80">
-                      {item}
-                    </Link>
-                  ))}
+                  <p className="font-medium">{formatName(name)}</p>
+                  <p className="text-xs text-foreground/70 font-light">{role}</p>
                 </div>
+                <ul className="mt-1">
+                  {anime.map(([id, title])=> (
+                    <li className="text-sm text-primary dark:text-primary/60">
+                      <Link href={`/${id}`} className="hover:underline">
+                        {'- '}{title}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </li>
           ))}
